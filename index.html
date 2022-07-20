@@ -75,8 +75,10 @@
                     console.log(`Sorry, you lost. The score is ${compWins} to ${userWins}`);
                 } else if (i === 5 && compWins < userWins) {
                     console.log(`Congrats! You won by a score of ${userWins} to ${compWins}`);
-                } 
-            }
+                } else {
+                    break;
+                }
+            } 
         }
 
         console.log(game());
