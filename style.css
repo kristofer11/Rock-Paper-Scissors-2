@@ -1,0 +1,89 @@
+* {
+    background-color: beige;
+}
+
+h1 {
+    color: salmon;
+    font-size: 4em;
+    text-align: center;
+    background: whitesmoke;
+    max-width: 80%;
+    align-self: center;
+    border: 1px solid turquoise;
+}
+
+button {
+    background-color: bisque;
+    color: navy;
+    padding: 11px 22px;
+    font-size: 2em;
+    border: 4px solid blue;
+    box-shadow:  10px 10px 8px #130b5a;
+    border-radius: 50%;
+    height: 266px;
+    width: 300px;
+    text-shadow: 2px 2px #0998eb;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.button-div {
+    display: flex;
+    gap: 22px;
+    margin-bottom: 33px;
+}
+
+.results {
+    color: rgb(36, 95, 46);
+    font-size: 3em;
+    margin: 33px;
+    background: rgb(143, 112, 54);
+    text-align: center;
+}
+
+.final-result {
+    color: goldenrod;
+    font-size: 2.5em;
+    border: 5px solid purple;
+    border-radius: 10px;
+    padding: 22px;
+    max-width: 450px;
+    text-align: center;
+    background: whitesmoke;
+}
+
+#rock {
+    background-image: url('rock.jpg');
+    background-size: cover;
+}
+
+#paper {
+    background-image: url('paper.jpg');
+    background-size: cover;
+}
+
+#scissors {
+    background-image: url('scissors.jpg');
+    background-size: cover;
+}
+
+.header-div {
+    display: flex;
+    justify-content: center;
+    border: 1px solid;
+    max-width: 900px;
+    background: yellow;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 900px;
+    gap: 10px;
+    background: silver;
+}

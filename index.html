@@ -4,18 +4,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>RPS</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 
+
+
+    <div class="content">
+        <div class="header-div">
+            <h1>Rock, Paper, Scissors!</h1>
+        </div>
+
+        <div class="container">
+            <div class="button-div">
+                <button id="rock" class="button" background-image="url">Rock</button>
+                <button id="paper" class="button">Paper</button>
+                <button id="scissors" class="button">Scissors</button>
+            </div>
+
+            <div id="results" class="results"></div>
+            <div id="final-result" class="final-result"></div>
+        </div>
+    </div>
+
+
+
+
     <script>  
-// Cheated just a tad here by looking at my old game. 
+
         let gameCount = 0;
         let compWins = 0;
         let userWins = 0;
-        let totalWins = compWins + userWins;
+        let userPlay = '';
+        const results = document.getElementById('results');
+        const finalResult = document.getElementById('final-result');
+        const rockButton = document.getElementById('rock');
+        const paperButton = document.getElementById('paper');
+        const scissorsButton = document.getElementById('scissors');
 
+        rockButton.addEventListener('click', userRock => playRound('rock'));
+        paperButton.addEventListener('click', userPaper => playRound('paper'));
+        scissorsButton.addEventListener('click', userScissors => playRound('scissors'));        
+        
         function getComputerChoice() {
             let randNum = Math.floor(Math.random() * 3);
             if (randNum === 0) {
@@ -27,76 +59,74 @@
             }
         }
 
-        function playRound() {
-            let choice = prompt("Type rock, paper, or scissors here:");
-            let userPlay = choice.toLowerCase();
+        function endGame() {
+            if (compWins === 5){
+                finalResult.textContent = `YOU LOOSE THE GAME! The score is ${compWins} to ${userWins}`;  
+            } else if (userWins === 5) {
+                finalResult.textContent = `You win the game! The score is user: ${userWins} computer: ${compWins}`;
+            } else {
+                finalResult.textContent = "First to 5 wins, choose again!";
+            }
+        }    
+
+        function playRound(userPlay) {
             let compPlay = getComputerChoice();
 
 
             if (compPlay === userPlay) {
-                console.log(`It is a tie! You both chose ${compPlay}!`); 
-                gameCount = gameCount - 1;
-                // userWins = userWins + 1;
-                // compWins = compWins + 1;
+                gameCount = gameCount + 1;
+                results.textContent = `It is a tie! You both chose ${compPlay}! User: ${userWins} Computer:${compWins}`; 
             } else if (compPlay === 'rock' && userPlay === 'paper') {
-                console.log('You win, paper covers rock!'); 
                 gameCount = gameCount + 1;
                 userWins = userWins + 1;
+                results.textContent = `You win, paper covers rock! User: ${userWins} Computer:${compWins}`;
             } else if (compPlay === 'rock' && userPlay === 'scissors') {
-                console.log('You loose, rock smashes scissors!'); 
                 gameCount = gameCount + 1;
                 compWins = compWins + 1;
+                results.textContent = `You loose, rock smashes scissors! User: ${userWins} Computer:${compWins}`;
             } else if (compPlay === 'paper' && userPlay === 'rock') {
-                console.log('You loose, paper covers rock!'); 
                 gameCount = gameCount + 1;
                 compWins = compWins + 1;
+                results.textContent = `You loose, paper covers rock! User: ${userWins} Computer:${compWins}`;
             } else if (compPlay === 'paper' && userPlay === 'scissors') {
-                console.log('You win! Scissors cut paper!'); 
                 gameCount = gameCount + 1;
                 userWins = userWins +1;
+                results.textContent = `You win! Scissors cut paper! User: ${userWins} Computer:${compWins}`;
             } else if (compPlay === 'scissors' && userPlay === 'rock') {
-                console.log('You win! Rock smashes scissors!'); 
-                gameCount = gameCount + 1;
+                                gameCount = gameCount + 1;
                 userWins = userWins + 1;
+                results.textContent = `You win! Rock smashes scissors! User: ${userWins} Computer:${compWins}`;
             } else if (compPlay === 'scissors' && userPlay === 'paper') {
-                console.log('You loose, the computer\'s scissors have cut your paper, yo!'); 
                 gameCount = gameCount + 1;
                 compWins = compWins + 1;
+                results.textContent = `You loose, the computer\'s scissors have cut your paper, yo! User: ${userWins} Computer:${compWins}`;
+            }
+            endGame();
+            if (compWins > 5 || userWins > 5) {
+                userWins = 0;
+                compWins = 0;
+                results.textContent = 'REFRESH TO PLAY AGAIN!';
             }
         }
 
-
-        //Used loop to play a 5 round game. Couldn't figure out how to make ties not count. Seems like for loop isn't the right way to achieve that? 
-        function game() {
-            for (let i = 0; gameCount < 5; i++){
-                if (i < 5) {
-                    playRound();
-                } else if (i === 5 && compWins > userWins) {
-                    console.log(`Sorry, you lost. The score is ${compWins} to ${userWins}`);
-                } else if (i === 5 && compWins < userWins) {
-                    console.log(`Congrats! You won by a score of ${userWins} to ${compWins}`);
-                } else {
-                    break;
-                }
-            } 
-        }
-
-        console.log(game());
-
-        //EXPERIMENTED WITH SOMETHING THAT DIDN'T WORK HERE
+        // //Used loop to play a 5 round game. Couldn't figure out how to make ties not count. Seems like for loop isn't the right way to achieve that? 
         // function game() {
-        //     if (totalWins === 3) {
-        //         if (compWins > userWins){
-        //             console.log(`YOU LOOSE! The computer won ${compWins} and you won ${userWins}!`)
-        //         } else if (compWins < userWins){
-        //             console.log(`Hey, nice work! You won by a score of ${userWins} to ${compWins}`);
+        //     for (let i = 0; gameCount < 5; i++){
+        //         if (i < 5) {
+        //             playRound();
+        //         } else if (i === 5 && compWins > userWins) {
+        //             console.log(`Sorry, you lost. The score is ${compWins} to ${userWins}`);
+        //         } else if (i === 5 && compWins < userWins) {
+        //             console.log(`Congrats! You won by a score of ${userWins} to ${compWins}`);
+        //         } else {
+        //             break;
         //         }
-        //     } else if (totalWins < 3){
-        //         playRound();
-        //     }
+        //     } 
         // }
 
-// console.log(game());  
+        // console.log(game());
+
+
 
     </script>
     
